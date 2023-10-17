@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyFarm</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_text">Input Your credentials to login</string>
+    <string name="input_phone">Enter Phone Number</string>
+    <string name="input_password">Enter Password</string>
+    <string name="sign_in">Sign In</string>
+</resources>
