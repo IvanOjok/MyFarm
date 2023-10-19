@@ -6,4 +6,5 @@
     <string name="input_phone">Enter Phone Number</string>
     <string name="input_password">Enter Password</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_up_text">Don\'t Have An Account? Sign Up Here.</string>
 </resources>

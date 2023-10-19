@@ -1,60 +1,103 @@
 package com.ivanojok.myfarm.ui
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.ivanojok.myfarm.R
+import com.ivanojok.myfarm.data.model.showError
+import com.ivanojok.myfarm.data.retrofit.RetrofitService
+import com.ivanojok.myfarm.databinding.FragmentLoginBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var _binding:FragmentLoginBinding ?= null
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        val x = hashMapOf<String, Any>("Ivan" to 1, "Peter" to "Mary")
+//        x.put("Tree",  "Zero")
+
+
+        with(binding) {
+            //button
+            signIn.setOnClickListener {
+                when {
+                    phone.text.isEmpty() -> {
+                        showDialog("Invalid Input", "Empty Phone Number")
+                    }
+                    password.text.isEmpty() -> {
+                        showDialog("Invalid Input", "Empty Password")
+                    }
+                    else -> {
+                        progress.visibility = View.VISIBLE
+                        val phone = phone.text.toString()
+                        val password = password.text.toString()
+                        login(phone, password)
+                    }
                 }
             }
+        }
+
+
     }
+
+    private fun showDialog(title:String, message:String) {
+        val alert = AlertDialog.Builder(requireContext()).setTitle(title).setMessage(message)
+            .setNegativeButton("CANCEL") { p0, p1 -> p0?.dismiss() }
+        alert.create()
+        alert.show()
+    }
+
+    fun login(phone:String, password:String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val retrofitService = RetrofitService().createResponseService()
+                val loginResponse = retrofitService.loginUser(phone, password)
+
+                withContext(Dispatchers.Main) {
+                    binding.progress.visibility = View.GONE
+                    if (loginResponse.response.id == "1") {
+                        findNavController().navigate(R.id.action_loginFragment_to_ownerFragment)
+                    } else {
+                        findNavController().navigate(R.id.action_loginFragment_to_workerFragment)
+                    }
+                }
+            } catch (t: Throwable) {
+                withContext(Dispatchers.Main) {
+                    binding.progress.visibility = View.GONE
+                    showDialog("An error Occurred", showError(t))
+                }
+            }
+        }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        _binding = null
+    }
+
+
 }

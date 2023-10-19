@@ -18,5 +18,22 @@
         android:id="@+id/loginFragment"
         android:name="com.ivanojok.myfarm.ui.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_ownerFragment"
+            app:destination="@id/ownerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_workerFragment"
+            app:destination="@id/workerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ownerFragment"
+        android:name="com.ivanojok.myfarm.ui.OwnerFragment"
+        android:label="fragment_owner"
+        tools:layout="@layout/fragment_owner" />
+    <fragment
+        android:id="@+id/workerFragment"
+        android:name="com.ivanojok.myfarm.ui.WorkerFragment"
+        android:label="fragment_worker"
+        tools:layout="@layout/fragment_worker" />
 </navigation>
