@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "com.ivanojok.myfarm";
+option java_multiple_files = true;
+
+message UserModel {
+  string id = 1;
+  string f_name = 2;
+  string l_name = 3;
+  string title = 4;
+  string phone = 5;
+  string image = 6;
+  string password = 7;
+  string age = 8;
+}

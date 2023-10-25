@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ivanojok.myfarm.R
+import com.ivanojok.myfarm.data.model.DataStoreService
 import com.ivanojok.myfarm.data.model.showError
 import com.ivanojok.myfarm.data.retrofit.RetrofitService
 import com.ivanojok.myfarm.databinding.FragmentLoginBinding
@@ -38,6 +39,12 @@ class LoginFragment : Fragment() {
 //        val x = hashMapOf<String, Any>("Ivan" to 1, "Peter" to "Mary")
 //        x.put("Tree",  "Zero")
 
+        object : Ivan {
+            override fun eat(): String {
+                TODO("Not yet implemented")
+            }
+
+        }
 
         with(binding) {
             //button
@@ -77,6 +84,7 @@ class LoginFragment : Fragment() {
 
                 withContext(Dispatchers.Main) {
                     binding.progress.visibility = View.GONE
+                    val ds = DataStoreService().writeToDataStore(loginResponse.response, requireContext())
                     if (loginResponse.response.id == "1") {
                         findNavController().navigate(R.id.action_loginFragment_to_ownerFragment)
                     } else {
@@ -99,5 +107,9 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 
+
+    interface Ivan {
+        fun eat(): String
+    }
 
 }

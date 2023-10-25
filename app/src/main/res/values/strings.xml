@@ -7,4 +7,14 @@
     <string name="input_password">Enter Password</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up_text">Don\'t Have An Account? Sign Up Here.</string>
+    <string name="ivan">Ivan Ojok</string>
+    <string name="title">Owner</string>
+    <string name="transactions">Transactions</string>
+    <string name="total_sales">Total Sales:</string>
+    <string name="total_purchases">Total Purchases:</string>
+    <string name="services">Services</string>
+    <string name="animals">Animals</string>
+    <string name="worker">Workers</string>
+    <string name="sales">Sales</string>
+    <string name="purchases">Purchases</string>
 </resources>
