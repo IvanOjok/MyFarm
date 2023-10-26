@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_ownerFragment"
+            app:destination="@id/ownerFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_workerFragment"
+            app:destination="@id/workerFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

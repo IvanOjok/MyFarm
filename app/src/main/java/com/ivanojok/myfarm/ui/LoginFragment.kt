@@ -2,6 +2,7 @@ package com.ivanojok.myfarm.ui
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -81,10 +82,12 @@ class LoginFragment : Fragment() {
             try {
                 val retrofitService = RetrofitService().createResponseService()
                 val loginResponse = retrofitService.loginUser(phone, password)
+                Log.d("Login Response", "$loginResponse")
+                val ds = DataStoreService().writeToDataStore(loginResponse.response, requireContext())
+                Log.d("Ds", "$ds")
 
                 withContext(Dispatchers.Main) {
                     binding.progress.visibility = View.GONE
-                    val ds = DataStoreService().writeToDataStore(loginResponse.response, requireContext())
                     if (loginResponse.response.id == "1") {
                         findNavController().navigate(R.id.action_loginFragment_to_ownerFragment)
                     } else {
@@ -94,6 +97,7 @@ class LoginFragment : Fragment() {
             } catch (t: Throwable) {
                 withContext(Dispatchers.Main) {
                     binding.progress.visibility = View.GONE
+                    Log.d("T", "$t")
                     showDialog("An error Occurred", showError(t))
                 }
             }
