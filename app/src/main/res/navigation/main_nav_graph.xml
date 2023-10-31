@@ -36,10 +36,19 @@
         android:id="@+id/ownerFragment"
         android:name="com.ivanojok.myfarm.ui.OwnerFragment"
         android:label="fragment_owner"
-        tools:layout="@layout/fragment_owner" />
+        tools:layout="@layout/fragment_owner" >
+        <action
+            android:id="@+id/action_ownerFragment_to_viewWorkersFragment"
+            app:destination="@id/viewWorkersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/workerFragment"
         android:name="com.ivanojok.myfarm.ui.WorkerFragment"
         android:label="fragment_worker"
         tools:layout="@layout/fragment_worker" />
+    <fragment
+        android:id="@+id/viewWorkersFragment"
+        android:name="com.ivanojok.myfarm.ui.ViewWorkersFragment"
+        android:label="fragment_view_workers"
+        tools:layout="@layout/fragment_view_workers" />
 </navigation>

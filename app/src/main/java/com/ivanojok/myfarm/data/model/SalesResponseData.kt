@@ -1,11 +1,14 @@
 package com.ivanojok.myfarm.data.model
 
+import androidx.room.Entity
+
 data class SalesResponseData(
     var errorCode:Int,
     var message:String,
     var response: List<SalesResponse>
 )
 
+@Entity
 data class SalesResponse(
     var id:String?,
     var animal_id:String?,

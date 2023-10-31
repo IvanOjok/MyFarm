@@ -7,6 +7,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.protobuf")
+    id("kotlin-kapt")
+    //id("com.google.devtools.ksp")
 }
 
 android {
@@ -33,11 +35,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -76,6 +78,17 @@ dependencies {
     implementation("com.google.protobuf:protobuf-javalite:3.19.2")
     //implementation("com.google.protobuf:protobuf-kotlin:3.19.4")
 
+    //room
+    val room_version = "2.6.0"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+
+}
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
 }
 
 protobuf {

@@ -1,8 +1,10 @@
 package com.ivanojok.myfarm.data.retrofit
 
+import com.ivanojok.myfarm.data.model.AnimalResponseData
 import com.ivanojok.myfarm.data.model.AuthResponseData
 import com.ivanojok.myfarm.data.model.PurchasesResponsesData
 import com.ivanojok.myfarm.data.model.SalesResponseData
+import com.ivanojok.myfarm.data.model.UsersResponseData
 import retrofit2.http.Field
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
@@ -25,4 +27,12 @@ interface ResponseInterface {
 
     @GET("get_sales.php")
     suspend fun getSales(): SalesResponseData
+
+
+    @GET("get_users.php")
+    suspend fun getUsers(): UsersResponseData
+
+    @GET("get_animals.php")
+    suspend fun getAnimals(): AnimalResponseData
+
 }
