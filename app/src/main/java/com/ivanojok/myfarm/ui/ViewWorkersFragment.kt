@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ivanojok.myfarm.R
 import com.ivanojok.myfarm.data.adapter.WorkerAdapter
@@ -36,6 +37,12 @@ class ViewWorkersFragment : Fragment() {
 
         lifecycleScope.launch {
             getUsersFromLocalDB()
+        }
+
+        with(binding) {
+            addWorker.setOnClickListener {
+                findNavController().navigate(R.id.action_viewWorkersFragment_to_addWorkerFragment)
+            }
         }
 
     }

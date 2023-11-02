@@ -1,5 +1,6 @@
 package com.ivanojok.myfarm.data.retrofit
 
+import com.ivanojok.myfarm.data.model.AddWorkerResponse
 import com.ivanojok.myfarm.data.model.AnimalResponseData
 import com.ivanojok.myfarm.data.model.AuthResponseData
 import com.ivanojok.myfarm.data.model.PurchasesResponsesData
@@ -9,6 +10,7 @@ import retrofit2.http.Field
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ResponseInterface {
@@ -34,5 +36,9 @@ interface ResponseInterface {
 
     @GET("get_animals.php")
     suspend fun getAnimals(): AnimalResponseData
+
+    @FormUrlEncoded
+    @POST("insert_user.php")
+    suspend fun addWorker(@FieldMap data:HashMap<String, Any?>, @Header("Authorization") token:String): AddWorkerResponse
 
 }

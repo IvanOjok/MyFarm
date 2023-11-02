@@ -50,5 +50,14 @@
         android:id="@+id/viewWorkersFragment"
         android:name="com.ivanojok.myfarm.ui.ViewWorkersFragment"
         android:label="fragment_view_workers"
-        tools:layout="@layout/fragment_view_workers" />
+        tools:layout="@layout/fragment_view_workers" >
+        <action
+            android:id="@+id/action_viewWorkersFragment_to_addWorkerFragment"
+            app:destination="@id/addWorkerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addWorkerFragment"
+        android:name="com.ivanojok.myfarm.ui.AddWorkerFragment"
+        android:label="fragment_add_worker"
+        tools:layout="@layout/fragment_add_worker" />
 </navigation>

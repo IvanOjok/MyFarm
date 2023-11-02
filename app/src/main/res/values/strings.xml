@@ -18,4 +18,10 @@
     <string name="sales">Sales</string>
     <string name="purchases">Purchases</string>
     <string name="phone">+256 704253811</string>
+    <string name="e_first_name">Enter First Name</string>
+    <string name="add_worker">Add Worker</string>
+    <string name="e_l_name">Enter Last Name</string>
+    <string name="e_title">Enter Title</string>
+    <string name="e_gender">Enter Gender</string>
+    <string name="e_age">Enter Age</string>
 </resources>
